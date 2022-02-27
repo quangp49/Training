@@ -22,4 +22,4 @@ import {HttpClientModule} from '@angular/common/http';
   providers: [],
   bootstrap: [TablePaginationExample],
 })
-export class AppModule {}
+export class AppModule {} 
