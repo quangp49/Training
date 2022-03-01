@@ -1,90 +1,90 @@
 <div class="mat-elevation-z8">
-  <table mat-table [dataSource]="dataSource" class="maintable">
+  <table mat-table [dataSource]="dataSource" class="maintable" style="overflow-x: auto;">
     <!-- <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef>Hành động</th>
       <td mat-cell *matCellDef="let element"> {{element.position}} </td>
     </ng-container> -->
 
     <ng-container matColumnDef="secCd">
-        <th mat-header-cell *matHeaderCellDef>Mã CK</th>
-        <td mat-cell *matCellDef="let element"> {{element.secCd}} </td>
+        <th mat-header-cell *matHeaderCellDef class="header">Mã CK</th>
+        <td mat-cell *matCellDef="let element" class="item string"> {{element.secCd}} </td>
     </ng-container>
     
     <ng-container matColumnDef="secType">
-        <th mat-header-cell *matHeaderCellDef>Loại</th>
-        <td mat-cell *matCellDef="let element"> {{element.secType}} </td>
+        <th mat-header-cell *matHeaderCellDef class="header">Loại</th>
+        <td mat-cell *matCellDef="let element" class="item string"> {{element.secType==1?"Cổ phiếu" : "Chứng quyền"}} </td>
     </ng-container>
 
     <ng-container matColumnDef="secSName">
-        <th mat-header-cell *matHeaderCellDef>Tên viết tắt</th>
-        <td mat-cell *matCellDef="let element"> {{element.secSName}} </td>
+        <th mat-header-cell *matHeaderCellDef class="header">Tên viết tắt</th>
+        <td mat-cell *matCellDef="let element" class="item string"> {{element.secSName}} </td>
     </ng-container>
 
     <ng-container matColumnDef="secName">
-        <th mat-header-cell *matHeaderCellDef>Tên đầy đủ</th>
-        <td mat-cell *matCellDef="let element"> {{element.secName}} </td>
+        <th mat-header-cell *matHeaderCellDef class="header">Tên đầy đủ</th>
+        <td mat-cell *matCellDef="let element" class="item string"> {{element.secName}} </td>
     </ng-container>
 
     <ng-container matColumnDef="capitalValue">
-        <th mat-header-cell *matHeaderCellDef>Vốn chủ sở hữu</th>
-        <td mat-cell *matCellDef="let element"> {{element.capitalValue}} </td>
+        <th mat-header-cell *matHeaderCellDef class="header">Vốn chủ sở hữu</th>
+        <td mat-cell *matCellDef="let element" class="item number"> {{element.capitalValue | number:'1.0':'en-US'}} </td>
     </ng-container>
 
     <ng-container matColumnDef="listedQty">
-        <th mat-header-cell *matHeaderCellDef>KL niêm yết</th>
-        <td mat-cell *matCellDef="let element"> {{element.listedQty}} </td>
+        <th mat-header-cell *matHeaderCellDef class="header">KL niêm yết</th>
+        <td mat-cell *matCellDef="let element" class="item number"> {{element.listedQty | number:'1.0':'en-US'}} </td>
     </ng-container>
 
     <ng-container matColumnDef="foreignMaxQty">
-        <th mat-header-cell *matHeaderCellDef>KL max cho NĐT NN</th>
-        <td mat-cell *matCellDef="let element"> {{element.foreignMaxQty}} </td>
+        <th mat-header-cell *matHeaderCellDef class="header">KL max cho NĐT NN</th>
+        <td mat-cell *matCellDef="let element" class="item number"> {{element.foreignMaxQty}} </td>
     </ng-container>
 
     <ng-container matColumnDef="stockDividendRate">
-        <th mat-header-cell *matHeaderCellDef>TL quyền CP vào tài sản (Số lượng)</th>
-        <td mat-cell *matCellDef="let element"> {{element.stockDividendRate}} </td>
+        <th mat-header-cell *matHeaderCellDef class="header">TL quyền CP vào tài sản (Số lượng)</th>
+        <td mat-cell *matCellDef="let element" class="item number"> {{element.stockDividendRate}} </td>
     </ng-container>
 
     <ng-container matColumnDef="cashDividendRate">
-        <th mat-header-cell *matHeaderCellDef>TL quyền CP vào tài sản (Số tiền)</th>
-        <td mat-cell *matCellDef="let element"> {{element.cashDividendRate}} </td>
+        <th mat-header-cell *matHeaderCellDef class="header">TL quyền CP vào tài sản (Số tiền)</th>
+        <td mat-cell *matCellDef="let element" class="item number"> {{element.cashDividendRate}} </td>
     </ng-container>
 
     <ng-container matColumnDef="marketCd">
-        <th mat-header-cell *matHeaderCellDef>Sàn</th>
-        <td mat-cell *matCellDef="let element"> {{element.marketCd}} </td>
+        <th mat-header-cell *matHeaderCellDef class="header">Sàn</th>
+        <td mat-cell *matCellDef="let element" class="item string"> {{element.marketCd==100?"Sàn Hồ Chí Minh" : (element.marketCd==200?"Sàn Hà Nội":"Sàn Upcom")}} </td>
     </ng-container>
 
     <ng-container matColumnDef="tradingLot">
-        <th mat-header-cell *matHeaderCellDef>Lô GD</th>
-        <td mat-cell *matCellDef="let element"> {{element.tradingLot}} </td>
+        <th mat-header-cell *matHeaderCellDef class="header">Lô GD</th>
+        <td mat-cell *matCellDef="let element" class="item number"> {{element.tradingLot}} </td>
     </ng-container>
 
     <ng-container matColumnDef="parValue">
-        <th mat-header-cell *matHeaderCellDef>Mệnh giá</th>
-        <td mat-cell *matCellDef="let element"> {{element.parValue}} </td>
+        <th mat-header-cell *matHeaderCellDef class="header">Mệnh giá</th>
+        <td mat-cell *matCellDef="let element" class="item number"> {{element.parValue | number:'1.0':'en-US'}} </td>
     </ng-container>
 
     <ng-container matColumnDef="maxRoom">
-        <th mat-header-cell *matHeaderCellDef>Room của mã</th>
-        <td mat-cell *matCellDef="let element"> {{element.maxRoom}} </td>
+        <th mat-header-cell *matHeaderCellDef class="header">Room của mã</th>
+        <td mat-cell *matCellDef="let element" class="item number"> {{element.maxRoom | number:'1.0':'en-US'}} </td>
     </ng-container>
 
     <ng-container matColumnDef="status">
-        <th mat-header-cell *matHeaderCellDef>Trạng thái</th>
-        <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+        <th mat-header-cell *matHeaderCellDef class="header">Trạng thái</th>
+        <td mat-cell *matCellDef="let element" class="item string"> {{element.status==1?"Có hiệu lực": "Không có hiệu lực"}} </td>
     </ng-container>
 
     <ng-container matColumnDef="remarks">
-        <th mat-header-cell *matHeaderCellDef>Ghi chú</th>
-        <td mat-cell *matCellDef="let element"> {{element.remarks}} </td>
+        <th mat-header-cell *matHeaderCellDef class="header">Ghi chú</th>
+        <td mat-cell *matCellDef="let element" class="item string"> {{element.remarks}} </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 
-  <mat-paginator [pageSizeOptions]="[5, 10, 100]"
+  <mat-paginator [pageSizeOptions]="[10, 50, 100]"
                  showFirstLastButtons 
                  aria-label="Select page of periodic elements">
   </mat-paginator>

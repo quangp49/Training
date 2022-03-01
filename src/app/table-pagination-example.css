@@ -1,6 +1,25 @@
 table {
   width: 100%;
+  display: block;
+  height: calc(100vh - 342px);
+  /* overflow-x: auto; */
+  table-layout: fixed;
 }
 tr:nth-child(even) {
-  background: #fcfcfc;
+  background: #cccccc;
 }
+.number {
+  text-align: right;
+}
+.header {
+  padding-left: 10px;
+  text-align: center;
+  /* width: 20% !important;
+  display: flex; */
+}
+.item {
+  padding-left: 10px;
+}
+/* ng-container {
+  width: 400px;
+} */
