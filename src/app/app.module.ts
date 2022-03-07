@@ -5,7 +5,6 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatPaginatorIntl } from '@angular/material/paginator';
-import { SearchPipe } from './search.pipe';
 
 import { MaterialExampleModule } from '../material.module';
 import { TablePaginationExample } from './table-pagination-example';

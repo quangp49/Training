@@ -22,7 +22,6 @@ export class TablePaginationExample implements AfterViewInit {
 
   constructor(private serverHttp: ServerHttpService, private _liveAnnouncer: LiveAnnouncer) { }
 
-  public searchInput: string;
   displayedColumns: string[] = ['secCd', 'secType', 'secSName', 'secName', 'capitalValue', 'listedQty', 'foreignMaxQty', 'stockDividendRate', 'cashDividendRate', 'marketCd', 'tradingLot', 'parValue', 'maxRoom', 'status', 'remarks'];
 
   dataSource = new MatTableDataSource<PeriodicElement>();
@@ -31,12 +30,21 @@ export class TablePaginationExample implements AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
 
   ngAfterViewInit(): void {
-    var subject = new Subject<string>();
     this.serverHttp.getProfile().subscribe((data) => {
-      this.dataSource = new MatTableDataSource(data)
+      this.dataSource = new MatTableDataSource(data);
+      console.log('test ' + data.secType);
+
+      // for (var item of data) {
+      //   if (data.item.secType === 100) {
+      //     data.item.secType = "Cổ phiếu";
+      //     console.log(data.item.secType);
+      //   }
+      //   else {
+      //     data.item.secType = "Chứng quyền";
+      //   }
+      // }
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-      //Search
 
     })
   }
@@ -54,12 +62,27 @@ export class TablePaginationExample implements AfterViewInit {
 }
 
 export interface PeriodicElement {
-  secCd: string,
-  // secType: string,
-  // secSName: string,
-  // secName: string,
-  // capitalValue: number,
-  // listedQty: number,
+  secCd: string;
+  secType: number; // option
+  secSName: string;
+  secName: string;
+  secClass: number;
+  capitalValue: number;
+  listedQty: number;
+  foreignMaxQty: number;
+  stockDividendRate: number
+  cashDividendRate: number;
+  marketCd: string;
+  tradingLot: number;
+  parValue: number;
+  maxRoom: number;
+  status: number;
+  remarks: string;
+  // createdUserId: string;
+  // createdTime: Date;
+  // updatedUserId: string;
+  // updatedTime: Date;
+  // isCalRightToAsset: string;
 }
 
 // const ELEMENT_DATA: PeriodicElement[] = []
