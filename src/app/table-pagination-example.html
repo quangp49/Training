@@ -1,8 +1,16 @@
 <form class="form">
     <mat-form-field appearance="outline">
         <mat-label>Tìm kiếm </mat-label>
-        <input type="search" placeholder="Nhập vào gì đó..." aria-label="Tìm kiếm" matInput>
+        <input matInput type="search" (keyup)="applyFilter($event)" placeholder="Nhập vào gì đó..."
+            aria-label="Tìm kiếm">
     </mat-form-field>
+    <!-- <h3> Results </h3>
+    <ul>
+        <li *ngFor="     
+            | search: searchInput">
+            {{programmingLanguage}}
+        </li>
+    </ul> -->
 </form>
 <hr>
 <div class="mat-elevation-z8">

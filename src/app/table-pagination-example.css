@@ -11,6 +11,9 @@ table {
 tr:nth-child(even) {
   background: #cccccc;
 }
+tr:hover {
+  background-color: rgb(175, 175, 175);
+}
 .number {
   text-align: right;
 }
