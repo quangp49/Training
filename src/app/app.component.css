@@ -1,0 +1,10 @@
+.button-row {
+  display: table-cell;
+  width: 490px;
+}
+.btn {
+  margin-right: 10px;
+  color: #fff;
+  background-color: #60b523;
+  border-radius: 5px;
+}

@@ -10,9 +10,11 @@ import { MaterialExampleModule } from '../material.module';
 import { AppComponent } from './app.component';
 import { CustomPaginator } from './Services/CustomPaginator';
 import { TableComponent } from './table/table.component';
+import { AppRoutingModule } from './app-routing.module';
+import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
-  declarations: [AppComponent, TableComponent],
+  declarations: [AppComponent, TableComponent, MenuComponent],
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
@@ -21,6 +23,7 @@ import { TableComponent } from './table/table.component';
     MatNativeDateModule,
     MaterialExampleModule,
     ReactiveFormsModule,
+    AppRoutingModule,
   ],
   providers: [{ provide: MatPaginatorIntl, useValue: CustomPaginator() }],
   bootstrap: [AppComponent],
