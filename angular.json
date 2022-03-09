@@ -98,7 +98,8 @@
             "karmaConfig": "karma.conf.js",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "src/assets"
+              "src/assets",
+              "src/pngegg.ico"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
