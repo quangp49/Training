@@ -1,5 +1,5 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { catchError, Observable } from 'rxjs';
 import { throwError } from 'rxjs/internal/observable/throwError';
 
@@ -14,7 +14,7 @@ export class ServerHttpService {
       'Content-Type': 'application/json',
     }),
   }
-  
+
   private REST_API_SERVER = 'http://localhost:3000'
 
   constructor(private httpClient: HttpClient) { }

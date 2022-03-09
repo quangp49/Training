@@ -1,7 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import {
-  LiveAnnouncer
-} from '@angular/cdk/a11y';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort, Sort } from '@angular/material/sort';
 import { AfterViewInit, Component, OnInit, ViewChild, LOCALE_ID } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
@@ -35,16 +33,6 @@ export class TablePaginationExample implements AfterViewInit {
       this.clone = data;
       this.convertType();
       this.dataSource = new MatTableDataSource(this.clone);
-
-      // for (var item of data) {
-      //   if (data.item.secType === 100) {
-      //     data.item.secType = "Cổ phiếu";
-      //     console.log(data.item.secType);
-      //   }
-      //   else {
-      //     data.item.secType = "Chứng quyền";
-      //   }
-      // }
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
 
@@ -64,18 +52,18 @@ export class TablePaginationExample implements AfterViewInit {
   convertType() {
     for (var itemm of this.clone) {
       // secType
-      // if (itemm.secType === 1) {
-      //   itemm.secType = "Cổ phiếu";
-      // }
-      // else if (itemm.secType === 3) {
-      //   itemm.secType = "Trái phiếu";
-      // }
-      // else if (itemm.secType === 5) {
-      //   itemm.secType = "Chứng quyền";
-      // }
-      // else {
-      //   itemm.secType = "Null";
-      // }
+      if (itemm.secType === 1) {
+        itemm.secType = "Cổ phiếu";
+      }
+      else if (itemm.secType === 3) {
+        itemm.secType = "Trái phiếu";
+      }
+      else if (itemm.secType === 5) {
+        itemm.secType = "Chứng quyền";
+      }
+      else {
+        itemm.secType = "Null";
+      }
 
       // marketCd
       if (itemm.marketCd === "100") {
