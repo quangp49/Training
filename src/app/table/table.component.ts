@@ -6,17 +6,18 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subject } from 'rxjs';
 
-import { ServerHttpService } from './Services/server-http.service';
+import { ServerHttpService } from '../Services/server-http.service';
 
 /**
  * @title Table with pagination
  */
+
 @Component({
-  selector: 'table-pagination-example',
-  styleUrls: ['table-pagination-example.css'],
-  templateUrl: 'table-pagination-example.html',
+  selector: 'app-table',
+  templateUrl: './table.component.html',
+  styleUrls: ['./table.component.scss']
 })
-export class TablePaginationExample implements AfterViewInit {
+export class TableComponent implements AfterViewInit {
 
   constructor(private serverHttp: ServerHttpService, private _liveAnnouncer: LiveAnnouncer) { }
 

@@ -7,11 +7,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 
 import { MaterialExampleModule } from '../material.module';
-import { TablePaginationExample } from './table-pagination-example';
+import { AppComponent } from './app.component';
 import { CustomPaginator } from './Services/CustomPaginator';
+import { TableComponent } from './table/table.component';
 
 @NgModule({
-  declarations: [TablePaginationExample],
+  declarations: [AppComponent, TableComponent],
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
@@ -22,6 +23,6 @@ import { CustomPaginator } from './Services/CustomPaginator';
     ReactiveFormsModule,
   ],
   providers: [{ provide: MatPaginatorIntl, useValue: CustomPaginator() }],
-  bootstrap: [TablePaginationExample],
+  bootstrap: [AppComponent],
 })
 export class AppModule { } 
