@@ -19,10 +19,16 @@ export class ServerHttpService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public getProfile(): Observable<any> {
-    const url = `${this.REST_API_SERVER}/profile`;
+  public getTable(): Observable<any> {
+    const url_table = `${this.REST_API_SERVER}/profile`;
     return this.httpClient
-      .get<any>(url, this.httpOptions)
+      .get<any>(url_table, this.httpOptions)
+      .pipe(catchError(this.handleError));
+  }
+  public getMenu(): Observable<any> {
+    const url_menu = `${this.REST_API_SERVER}/menu`;
+    return this.httpClient
+      .get<any>(url_menu, this.httpOptions)
       .pipe(catchError(this.handleError));
   }
 

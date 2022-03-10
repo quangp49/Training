@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort, Sort } from '@angular/material/sort';
-import { AfterViewInit, Component, OnInit, ViewChild, LOCALE_ID } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subject } from 'rxjs';
@@ -30,7 +30,7 @@ export class TableComponent implements AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
 
   ngAfterViewInit(): void {
-    this.serverHttp.getProfile().subscribe(data => {
+    this.serverHttp.getTable().subscribe(data => {
       this.clone = data;
       this.convertType();
       this.dataSource = new MatTableDataSource(this.clone);
