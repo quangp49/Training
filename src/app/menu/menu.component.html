@@ -3,12 +3,12 @@
     <span class="example-list-section">
         <mat-checkbox class="example-margin" [checked]="allComplete" [indeterminate]="someComplete()"
             (change)="setAll($event.checked)">
-            {{group_1.name}}
+            {{task.name}}
         </mat-checkbox>
     </span>
     <span class="example-list-section">
         <ul>
-            <li *ngFor="let subtask of group_1.subtasks">
+            <li *ngFor="let subtask of task.subtasks">
                 <mat-checkbox [(ngModel)]="subtask.completed" (ngModelChange)="updateAllComplete()">
                     {{subtask}}
                 </mat-checkbox>
