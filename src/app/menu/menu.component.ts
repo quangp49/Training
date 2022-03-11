@@ -14,6 +14,7 @@ export class MenuComponent implements AfterViewInit {
 
   constructor(private serverHttp: ServerHttpService) { }
 
+  clone: any;
   group_1: clonee = {
     name: "Lệnh",
     completed: true,
@@ -21,16 +22,21 @@ export class MenuComponent implements AfterViewInit {
   };
 
   ngAfterViewInit(): void {
-
-
-
     this.serverHttp.getMenu().subscribe(data => {
-      this.group_1.subtasks = data;
+      this.clone = data;
+      // this.test();
+      this.group_1.subtasks = this.clone;
       console.log(this.group_1.subtasks);
-
     })
   }
   allComplete: boolean = false;
+
+  test() {
+    for (var itemm of this.clone) {
+      console.log(itemm.menuName);
+
+    }
+  }
 
   updateAllComplete() {
     this.allComplete = this.group_1.subtasks != null && this.group_1.subtasks.every(t => t.completed);
@@ -55,5 +61,17 @@ export class MenuComponent implements AfterViewInit {
 export interface clonee {
   name: string;
   completed: boolean;
-  subtasks?: clonee[];
+  subtasks?: subtasks_ele[];
+}
+export interface subtasks_ele {
+  menuCode: string,
+  menuName: string,
+  menuUrl: string,
+  parentCode: string,
+  remarks: string,
+  createdUserId: string,
+  createdTime: string,
+  updateUserId: string,
+  updateTime: string,
+  completed: boolean,
 }
