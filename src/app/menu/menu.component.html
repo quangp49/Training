@@ -10,7 +10,7 @@
         <ul>
             <li *ngFor="let subtask of task.subtasks">
                 <mat-checkbox [(ngModel)]="subtask.completed" (ngModelChange)="updateAllComplete()">
-                    {{subtask}}
+                    {{subtask.menuName}}
                 </mat-checkbox>
             </li>
         </ul>

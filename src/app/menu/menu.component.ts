@@ -19,19 +19,23 @@ export class MenuComponent implements OnInit {
   ngOnInit(): void {
     this.serverHttp.getMenu().subscribe(data => {
       this.clone = data;
-      this.task.subtasks = data;
-      console.log(this.clone);
-
-
+      this.task.subtasks = this.clone;
+      this.presentData();
     })
   }
   allComplete: boolean = false;
 
-  task: Task = {
-    name: this.clone.parentCode,
+  task: task_ele = {
+    name: '',
     completed: true,
     subtasks: [],
   };
+
+  presentData() {
+    this.task.subtasks.forEach(element => {
+      console.log(element.parentCode);
+    });
+  }
   updateAllComplete() {
     this.allComplete = this.task.subtasks != null && this.task.subtasks.every(t => t.completed);
   }
@@ -51,21 +55,23 @@ export class MenuComponent implements OnInit {
     this.task.subtasks.forEach(t => (t.completed = completed));
   }
 }
-
-export interface Task {
+export interface task_form {
+  element: task_ele,
+}
+export interface task_ele {
   name: string;
   completed: boolean;
-  subtasks: Task[];
+  subtasks: subtasks_ele[];
 }
-// export interface subtasks_ele {
-//   menuCode: string,
-//   menuName: string,
-//   menuUrl: string,
-//   parentCode: string,
-//   remarks: string,
-//   createdUserId: string,
-//   createdTime: string,
-//   updateUserId: string,
-//   updateTime: string,
-//   completed: boolean,
-// }
+export interface subtasks_ele {
+  menuCode: string,
+  menuName: string,
+  menuUrl: string,
+  parentCode: string,
+  remarks: string,
+  createdUserId: string,
+  createdTime: string,
+  updateUserId: string,
+  updateTime: string,
+  completed: boolean,
+}
