@@ -14,13 +14,14 @@ export class MenuComponent implements OnInit {
 
   constructor(private serverHttp: ServerHttpService) { }
 
-  clone: any;
+  clone: subtasks_ele[];
 
   ngOnInit(): void {
     this.serverHttp.getMenu().subscribe(data => {
       this.clone = data;
-      this.task.subtasks = this.clone;
-      this.presentData();
+      this.task.subtasks = this.groupBy(data, 'parentCode')
+      console.log(this.task.subtasks);
+
     })
   }
   allComplete: boolean = false;
@@ -31,9 +32,20 @@ export class MenuComponent implements OnInit {
     subtasks: [],
   };
 
-  presentData() {
-    this.task.subtasks.forEach(element => {
-      console.log(element.parentCode);
+  groupBy(objectArray: any, property: any) {
+    return objectArray.reduce((acc: any, obj: any) => {
+      const key = obj[property];
+      if (!acc[key]) {
+        acc[key] = [];
+      }
+      // Add object to list for given key's value
+      acc[key].push(obj);
+      return acc;
+    }, {});
+  }
+  test() {
+    this.task.subtasks.forEach(subtask => {
+
     });
   }
   updateAllComplete() {
@@ -54,9 +66,6 @@ export class MenuComponent implements OnInit {
     }
     this.task.subtasks.forEach(t => (t.completed = completed));
   }
-}
-export interface task_form {
-  element: task_ele,
 }
 export interface task_ele {
   name: string;
