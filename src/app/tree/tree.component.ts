@@ -13,16 +13,14 @@ export class TreeComponent implements AfterViewInit {
 
   allCompltedTemp = this.testFunction().allCompletedTemp;
 
+
+
   constructor(private serverHttp: ServerHttpService) { }
 
   ngAfterViewInit(): void {
-    this.serverHttp.getMenu().subscribe(data => {
-      this.menu = data;
-      // console.log(this.menu);
-
-    })
+    console.log(typeof (this.temp));
+    console.log(this.tempKey);
   }
-
   someComplete(key: any): boolean {
     if (this.temp[key].subtasks == null) {
       return false;
@@ -45,23 +43,32 @@ export class TreeComponent implements AfterViewInit {
   testFunction() {
     let allCompletedTemp: any = {};
     let test: any = {};
-    this.menu.forEach(item => {
-      allCompletedTemp[item.parentCode] = false;
-      if (test[item.parentCode]) {
-        test[item.parentCode].subtasks.push({ name: item.menuName, completed: false })
-      }
-      else {
-        test[item.parentCode] = {
-          name: item.parentCode,
-          completed: false,
-          subtasks: [
-            { name: item.menuName, completed: false }
-          ],
+    this.serverHttp.getMenu().subscribe(data => {
+      this.menu = data;
+
+      this.menu.forEach(item => {
+        allCompletedTemp[item.parentCode] = false;
+        if (test[item.parentCode]) {
+          test[item.parentCode].subtasks.push({ name: item.menuName, completed: false })
         }
-      }
+        else {
+          test[item.parentCode] = {
+            name: item.parentCode,
+            completed: false,
+            subtasks: [
+              { name: item.menuName, completed: false }
+            ],
+          }
+        }
+      })
+
     })
+
+
+
     return {
       test,
+
       allCompletedTemp
     };
   }

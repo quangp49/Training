@@ -6,9 +6,10 @@ import { MenuComponent } from './menu/menu.component';
 import { TreeComponent } from './tree/tree.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: '/tree', pathMatch: 'full' },
   { path: 'table', component: TableComponent },
   { path: 'menu', component: MenuComponent },
-  { path: 'tree', component: TreeComponent }
+  { path: 'tree', component: TreeComponent },
 ]
 
 @NgModule({
