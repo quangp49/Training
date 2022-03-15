@@ -36,8 +36,8 @@ export class TableComponent implements AfterViewInit {
       this.dataSource = new MatTableDataSource(this.clone);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-
     })
+
   }
   announceSortChange(sortState: Sort) {
     if (sortState.direction) {
