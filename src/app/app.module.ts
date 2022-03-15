@@ -12,9 +12,10 @@ import { CustomPaginator } from './Services/CustomPaginator';
 import { TableComponent } from './table/table.component';
 import { AppRoutingModule } from './app-routing.module';
 import { MenuComponent } from './menu/menu.component';
+import { TreeComponent } from './tree/tree.component';
 
 @NgModule({
-  declarations: [AppComponent, TableComponent, MenuComponent],
+  declarations: [AppComponent, TableComponent, MenuComponent, TreeComponent],
   imports: [
     BrowserAnimationsModule,
     BrowserModule,

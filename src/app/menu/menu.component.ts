@@ -19,9 +19,9 @@ export class MenuComponent implements OnInit {
   ngOnInit(): void {
     this.serverHttp.getMenu().subscribe(data => {
       this.clone = data;
-      this.task.subtasks = this.groupBy(data, 'parentCode')
+      this.task.subtasks = this.groupBy(this.clone, 'parentCode');
+      // this.task.subtasks = this.clone;
       console.log(this.task.subtasks);
-
     })
   }
   allComplete: boolean = false;
