@@ -6,21 +6,35 @@ import { ServerHttpService } from '../Services/server-http.service';
   templateUrl: './tree.component.html',
   styleUrls: ['./tree.component.scss']
 })
-export class TreeComponent implements AfterViewInit {
+export class TreeComponent implements OnInit,AfterViewInit {
   menu: subtasks_ele[];
-  temp = this.testFunction().test;
-  tempKey = Object.keys(this.temp);
 
-  allCompltedTemp = this.testFunction().allCompletedTemp;
+  temp : any =  {};
+  allCompltedTemp : any;
+  tempKey : Array<string> = [];
+
+  // allCompltedTemp = this.testFunction().allCompletedTemp;
 
 
 
   constructor(private serverHttp: ServerHttpService) { }
+  ngOnInit(): void {
+
+    this.testFunction().then((data) => {
+      this.temp = data.test;
+      this.allCompltedTemp = data.allCompletedTemp;
+      this.tempKey = data.temp;
+
+      console.log(this.tempKey)
+       
+    });
+    
+  }
 
   ngAfterViewInit(): void {
-    console.log(typeof (this.temp));
-    console.log(this.tempKey);
+    
   }
+  
   someComplete(key: any): boolean {
     if (this.temp[key].subtasks == null) {
       return false;
@@ -40,14 +54,19 @@ export class TreeComponent implements AfterViewInit {
     this.temp[key].subtasks.forEach((t: any) => (t.completed = completed));
   }
 
-  testFunction() {
+  async testFunction() {
+    let temp : any = [];
     let allCompletedTemp: any = {};
     let test: any = {};
-    this.serverHttp.getMenu().subscribe(data => {
+    await this.serverHttp.getMenu().subscribe(data => {
       this.menu = data;
 
       this.menu.forEach(item => {
         allCompletedTemp[item.parentCode] = false;
+        if(!temp.includes(item.parentCode)){
+          temp.push(item.parentCode)
+        }
+        
         if (test[item.parentCode]) {
           test[item.parentCode].subtasks.push({ name: item.menuName, completed: false })
         }
@@ -62,20 +81,24 @@ export class TreeComponent implements AfterViewInit {
         }
       })
 
-    })
+    },err => console.log(err))
 
 
 
     return {
       test,
-
+      temp,
       allCompletedTemp
     };
   }
 
   onClear() {
-    this.temp = this.testFunction().test;
-    this.allCompltedTemp = this.testFunction().allCompletedTemp;
+    this.testFunction().then((data) => {
+      this.temp = data.test;
+      this.allCompltedTemp = data.allCompletedTemp;
+      this.tempKey = data.temp;
+       
+    });
   }
 
   onSubmit() {
