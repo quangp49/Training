@@ -5,6 +5,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatPaginatorIntl } from '@angular/material/paginator';
+import { NgChartsModule } from 'ng2-charts';
 
 import { MaterialExampleModule } from '../material.module';
 import { AppComponent } from './app.component';
@@ -13,9 +14,10 @@ import { TableComponent } from './table/table.component';
 import { AppRoutingModule } from './app-routing.module';
 import { MenuComponent } from './menu/menu.component';
 import { TreeComponent } from './tree/tree.component';
+import { ChartComponent } from './chart/chart.component';
 
 @NgModule({
-  declarations: [AppComponent, TableComponent, MenuComponent, TreeComponent],
+  declarations: [AppComponent, TableComponent, MenuComponent, TreeComponent, ChartComponent],
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
@@ -25,6 +27,7 @@ import { TreeComponent } from './tree/tree.component';
     MaterialExampleModule,
     ReactiveFormsModule,
     AppRoutingModule,
+    NgChartsModule,
   ],
   providers: [{ provide: MatPaginatorIntl, useValue: CustomPaginator() }],
   bootstrap: [AppComponent],

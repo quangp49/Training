@@ -4,12 +4,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { TableComponent } from './table/table.component';
 import { MenuComponent } from './menu/menu.component';
 import { TreeComponent } from './tree/tree.component';
+import { ChartComponent } from './chart/chart.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/tree', pathMatch: 'full' },
   { path: 'table', component: TableComponent },
   { path: 'menu', component: MenuComponent },
   { path: 'tree', component: TreeComponent },
+  { path: 'chart', component: ChartComponent },
 ]
 
 @NgModule({

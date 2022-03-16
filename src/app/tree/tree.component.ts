@@ -6,12 +6,12 @@ import { ServerHttpService } from '../Services/server-http.service';
   templateUrl: './tree.component.html',
   styleUrls: ['./tree.component.scss']
 })
-export class TreeComponent implements OnInit,AfterViewInit {
+export class TreeComponent implements OnInit, AfterViewInit {
   menu: subtasks_ele[];
 
-  temp : any =  {};
-  allCompltedTemp : any;
-  tempKey : Array<string> = [];
+  temp: any = {};
+  allCompltedTemp: any;
+  tempKey: Array<string> = [];
 
   // allCompltedTemp = this.testFunction().allCompletedTemp;
 
@@ -26,15 +26,15 @@ export class TreeComponent implements OnInit,AfterViewInit {
       this.tempKey = data.temp;
 
       console.log(this.tempKey)
-       
+
     });
-    
+
   }
 
   ngAfterViewInit(): void {
-    
+
   }
-  
+
   someComplete(key: any): boolean {
     if (this.temp[key].subtasks == null) {
       return false;
@@ -55,7 +55,7 @@ export class TreeComponent implements OnInit,AfterViewInit {
   }
 
   async testFunction() {
-    let temp : any = [];
+    let temp: any = [];
     let allCompletedTemp: any = {};
     let test: any = {};
     await this.serverHttp.getMenu().subscribe(data => {
@@ -63,10 +63,10 @@ export class TreeComponent implements OnInit,AfterViewInit {
 
       this.menu.forEach(item => {
         allCompletedTemp[item.parentCode] = false;
-        if(!temp.includes(item.parentCode)){
+        if (!temp.includes(item.parentCode)) {
           temp.push(item.parentCode)
         }
-        
+
         if (test[item.parentCode]) {
           test[item.parentCode].subtasks.push({ name: item.menuName, completed: false })
         }
@@ -81,7 +81,7 @@ export class TreeComponent implements OnInit,AfterViewInit {
         }
       })
 
-    },err => console.log(err))
+    }, err => console.log(err))
 
 
 
@@ -97,7 +97,7 @@ export class TreeComponent implements OnInit,AfterViewInit {
       this.temp = data.test;
       this.allCompltedTemp = data.allCompletedTemp;
       this.tempKey = data.temp;
-       
+
     });
   }
 
