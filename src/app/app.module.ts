@@ -13,9 +13,10 @@ import { TableComponent } from './table/table.component';
 import { AppRoutingModule } from './app-routing.module';
 import { MenuComponent } from './menu/menu.component';
 import { TreeComponent } from './tree/tree.component';
+import { ChartComponent } from './chart/chart.component';
 
 @NgModule({
-  declarations: [AppComponent, TableComponent, MenuComponent, TreeComponent,],
+  declarations: [AppComponent, TableComponent, MenuComponent, TreeComponent, ChartComponent,],
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
