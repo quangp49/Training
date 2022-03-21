@@ -1,54 +1,61 @@
-/* .form {
-  padding-left: 10px;
-  padding-top: 5px; 
-} */
 table {
-    width: 100%;
-    display: block;
-    height: calc(100vh - 300px);
-    table-layout: fixed;
-  }
-  tr:nth-child(even) {
-    background: #cccccc;
-  }
-  tr:hover {
-    background-color: rgb(175, 175, 175);
-  }
-  .number {
-    text-align: right;
-  }
-  .header {
-    padding-left: 20px;
-    text-align: center;
-    position: sticky !important;
-    /* width: 20% !important;
-    display: flex; */
-  }
-  .scol {
-    max-width: 6vw !important;
-    min-width: 6vw !important;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-    text-overflow: ellipsis;
-  }
-  .mcol {
-    max-width: 8vw !important;
-    min-width: 8vw !important;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-    text-overflow: ellipsis;
-  }
-  .lcol {
-    max-width: 11.5vw !important;
-    min-width: 11.5vw !important;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-    text-overflow: ellipsis;
-  }
-  .item {
-    padding-left: 10px;
-  }
-  /* ng-container {
-    width: 400px;
-  } */
-  
+  width: 100%;
+  display: block;
+  height: calc(100vh - 300px);
+  table-layout: fixed;
+}
+tr:nth-child(even) {
+  background: #cccccc;
+}
+tr:hover {
+  background-color: rgb(175, 175, 175);
+}
+.number {
+  text-align: right;
+}
+.header {
+  padding-left: 20px;
+  text-align: justify;
+  position: sticky !important;
+  /* width: 20% !important;
+  display: flex; */
+}
+.scol {
+  max-width: 6vw !important;
+  min-width: 6vw !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  text-overflow: ellipsis;
+}
+.mcol {
+  max-width: 8vw !important;
+  min-width: 8vw !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  text-overflow: ellipsis;
+}
+.lcol {
+  max-width: 11.5vw !important;
+  min-width: 11.5vw !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  text-overflow: ellipsis;
+}
+.item {
+  padding-left: 10px;
+}
+
+//Centering header
+:host ::ng-deep .mat-sort-header-container {
+  display: flex;
+  justify-content: center;
+}
+.btn-action {
+  margin-right: 10px;
+  color: #fff;
+  background-color: #60b523;
+  border-radius: 5px;
+}
+/* ng-container {
+  width: 400px;
+} */

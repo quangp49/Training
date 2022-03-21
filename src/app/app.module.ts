@@ -15,9 +15,10 @@ import { MenuComponent } from './menu/menu.component';
 import { TreeComponent } from './tree/tree.component';
 import { ChartComponent } from './chart/chart.component';
 import { SysUnitComponent } from './sys-unit/sys-unit.component';
+import { SysUnitDialogComponent } from './sys-unit/sys-unit-dialog/sys-unit-dialog.component';
 
 @NgModule({
-  declarations: [AppComponent, TableComponent, MenuComponent, TreeComponent, ChartComponent, SysUnitComponent,],
+  declarations: [AppComponent, TableComponent, MenuComponent, TreeComponent, ChartComponent, SysUnitComponent, SysUnitDialogComponent,],
   imports: [
     BrowserAnimationsModule,
     BrowserModule,

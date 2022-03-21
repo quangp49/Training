@@ -14,6 +14,17 @@
         <th mat-header-cell *matHeaderCellDef>Hành động</th>
         <td mat-cell *matCellDef="let element"> {{element.position}} </td>
         </ng-container> -->
+        <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef> Hành động
+            </th>
+            <td mat-cell *matCellDef="let row">
+              <button mat-raised-button color="green" [matMenuTriggerFor]="menu" class="btn-action">Hành động</button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item >Sửa</button>
+                <button mat-menu-item >Xóa</button>
+              </mat-menu>
+            </td>
+          </ng-container>
 
         <ng-container matColumnDef="unitCode">
             <th mat-header-cell *matHeaderCellDef mat-sort-header class="header scol">Mã đơn vị</th>
@@ -81,8 +92,8 @@
         </ng-container>
 
         <ng-container matColumnDef="createdTime">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header class="header scol">Thời gian tạo</th>
-            <td mat-cell *matCellDef="let element" class="item number"> {{element.createdTime}} </td>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="header lcol">Thời gian tạo</th>
+            <td mat-cell *matCellDef="let element" class="item number"> {{element.createdTime | date: 'dd/MM/yyyy HH:mm:ss'}} </td>
         </ng-container>
 
         <ng-container matColumnDef="updatedUserId">
@@ -91,8 +102,8 @@
         </ng-container>
 
         <ng-container matColumnDef="updatedTime">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header class="header scol">Thời gian sửa</th>
-            <td mat-cell *matCellDef="let element" class="item string"> {{element.updatedTime}} </td>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="header lcol">Thời gian sửa</th>
+            <td mat-cell *matCellDef="let element" class="item string"> {{element.updatedTime | date: 'dd/MM/yyyy HH:mm:ss'}} </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>

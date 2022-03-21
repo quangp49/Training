@@ -5,6 +5,7 @@ import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subject } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
 import { ServerHttpService } from '../Services/server-http.service';
 
@@ -21,7 +22,7 @@ export class SysUnitComponent implements AfterViewInit {
 
   constructor(private serverHttp: ServerHttpService, private _liveAnnouncer: LiveAnnouncer) { }
 
-  displayedColumns: string[] = ['unitCode', 'branchCode', 'unitName', 'unitSName', 'address', 'telNo', 'faxNo', 'email', 'type', 'status',  'createdUserId', 'createdTime', 'updatedUserId', 'updatedTime'];
+  displayedColumns: string[] = ['select', 'unitCode', 'branchCode', 'unitName', 'unitSName', 'address', 'telNo', 'faxNo', 'email', 'type', 'status',  'createdUserId', 'createdTime', 'updatedUserId', 'updatedTime'];
 
   dataSource = new MatTableDataSource<PeriodicElement>();
   clone: any;
@@ -96,6 +97,7 @@ export class SysUnitComponent implements AfterViewInit {
   this.dataSource.paginator = this.paginator;
   this.dataSource.sort = this.sort;
   }
+
   announceSortChange(sortState: Sort) {
     if (sortState.direction) {
       this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
@@ -103,9 +105,14 @@ export class SysUnitComponent implements AfterViewInit {
       this._liveAnnouncer.announce('Sorting cleared');
     }
   }
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  edit(){
+    
   }
   // convertType() {
   //   for (var itemm of this.clone) {
