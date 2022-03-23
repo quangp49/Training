@@ -1,1 +1,176 @@
-<p>sys-unit-dialog works!</p>
+<h1 mat-dialog-title>{{ title }}</h1>
+<div mat-dialog-content>
+  <mat-grid-list cols="2" rowHeight="4:1">
+    <mat-grid-tile *ngIf="action !== ACTION_DELETE">
+      <mat-form-field appearance="outline">
+        <mat-label>Mã Đơn Vị</mat-label>
+        <input
+          matInput
+          [(ngModel)]="unitCode"
+          [disabled]="action === ACTION_UPDATE"
+          aria-label="Mã Đơn Vị"
+          required
+        />
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile *ngIf="action !== ACTION_DELETE">
+      <mat-form-field appearance="outline">
+        <mat-label>Mã Chi Nhánh</mat-label>
+        <input
+          type="text"
+          placeholder="Chọn"
+          aria-label="Mã Chi Nhánh"
+          matInput
+          [formControl]="branchCodeControl"
+          [matAutocomplete]="autoBranchCode"
+          required
+        />
+        <mat-autocomplete
+          autoActiveFirstOption
+          #autoBranchCode="matAutocomplete"
+        >
+          <mat-option
+            *ngFor="let branchCode of branchCodeFilter | async"
+            [value]="branchCode"
+          >
+            {{ branchCode }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile *ngIf="action !== ACTION_DELETE" [colspan]="2" [rowspan]="1">
+      <mat-form-field appearance="outline">
+        <mat-label>Tên Đơn Vị</mat-label>
+        <input
+          matInput
+          [(ngModel)]="unitName"
+          aria-label="Tên Đơn Vị"
+          required
+        />
+      </mat-form-field>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <mat-grid-list cols="2" rowHeight="4:1">
+    <mat-grid-tile *ngIf="action !== ACTION_DELETE">
+      <mat-form-field appearance="outline">
+        <mat-label>Tên Viết Tắt</mat-label>
+        <input
+          matInput
+          [(ngModel)]="unitSName"
+          aria-label="Tên Viết Tắt"
+          required
+        />
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile *ngIf="action !== ACTION_DELETE">
+      <mat-form-field appearance="outline">
+        <mat-label>SĐT</mat-label>
+        <input matInput [(ngModel)]="telNo" aria-label="SĐT" />
+      </mat-form-field>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <mat-grid-list cols="2" rowHeight="4:1">
+    <mat-grid-tile *ngIf="action !== ACTION_DELETE" [rowspan]="1" [colspan]="2">
+      <mat-form-field appearance="outline">
+        <mat-label>Địa Chỉ</mat-label>
+        <input matInput [(ngModel)]="address" aria-label="Địa Chỉ" />
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile *ngIf="action !== ACTION_DELETE">
+      <mat-form-field appearance="outline">
+        <mat-label>Số Fax</mat-label>
+        <input matInput [(ngModel)]="faxNo" aria-label="Số Fax" />
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile *ngIf="action !== ACTION_DELETE">
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput [(ngModel)]="email" aria-label="Email" />
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile *ngIf="action !== ACTION_DELETE">
+      <mat-form-field appearance="outline">
+        <mat-label>Loại</mat-label>
+        <mat-select [(value)]="type">
+          <mat-option *ngFor="let data of typeList" value="{{ data.value }}">{{
+            data.name
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile *ngIf="action !== ACTION_DELETE">
+      <mat-form-field appearance="outline">
+        <mat-label>Trạng Thái</mat-label>
+        <mat-select [(value)]="status">
+          <mat-option
+            *ngFor="let data of statusList"
+            value="{{ data.value }}"
+            >{{ data.name }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile *ngIf="action !== ACTION_DELETE" [colspan]="2" [rowspan]="1">
+      <mat-form-field appearance="outline">
+        <mat-label>Ghi chú</mat-label>
+        <input matInput [(ngModel)]="remarks" aria-label="Ghi chú" />
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile *ngIf="action === ACTION_UPDATE">
+      <mat-form-field appearance="outline" *ngIf="action === ACTION_UPDATE">
+        <mat-label>Người tạo</mat-label>
+        <input
+          matInput
+          [(ngModel)]="createdUserId"
+          disabled
+          aria-label="Người tạo"
+        />
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile *ngIf="action === ACTION_UPDATE">
+      <mat-form-field appearance="outline">
+        <mat-label>Thời gian tạo</mat-label>
+        <input
+          matInput
+          value="{{ createdTime | date: 'dd/MM/yyyy HH:mm:ss' }}"
+          disabled
+          aria-label="Thời gian tạo"
+        />
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile *ngIf="action === ACTION_UPDATE">
+      <mat-form-field appearance="outline">
+        <mat-label>Người sửa</mat-label>
+        <input
+          matInput
+          [(ngModel)]="updatedUserId"
+          disabled
+          aria-label="Người sửa"
+        />
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile *ngIf="action === ACTION_UPDATE">
+      <mat-form-field appearance="outline">
+        <mat-label>Thời gian sửa</mat-label>
+        <input
+          matInput
+          value="{{ updatedTime | date: 'dd/MM/yyyy HH:mm:ss' }}"
+          disabled
+          aria-label="Thời gian sửa"
+        />
+      </mat-form-field>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-raised-button (click)="onNoClick()">Đóng</button>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="onYesClick()"
+    cdkFocusInitial
+    class="btn"
+  >
+    {{ titleYes }}
+  </button>
+</div>

@@ -15,7 +15,7 @@ export class ChartComponent implements OnInit {
 
   ngOnInit(): void {
     for (var i = 0; i < 100; ++i) this.array[i] = i;
-    this.array = this.random(this.array);
+    this.array = this.random_function(this.array);
     console.log('data ' + this.array);
     this.label_function();
     console.log('label ' + this.label);
@@ -36,7 +36,7 @@ export class ChartComponent implements OnInit {
     for (var i = 1; i < 101; ++i) this.label[i] = i;
     // return this.label;
   }
-  random(array: Array<number>) {
+  random_function(array: Array<number>) {
     var tmp, current, top = array.length;
     if (top) while (--top) {
       current = Math.floor(Math.random() * (top + 1));
@@ -46,6 +46,4 @@ export class ChartComponent implements OnInit {
     }
     return array;
   }
-
-
 }

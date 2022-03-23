@@ -1,3 +1,8 @@
+.screen_header {
+  text-align: center;
+  display: inline-block;
+  padding-right: 10px;
+}
 table {
   width: 100%;
   display: block;
@@ -14,7 +19,7 @@ tr:hover {
   text-align: right;
 }
 .header {
-  padding-left: 20px;
+  // padding-left: 20px;
   text-align: justify;
   position: sticky !important;
   /* width: 20% !important;
@@ -55,6 +60,9 @@ tr:hover {
   color: #fff;
   background-color: #60b523;
   border-radius: 5px;
+}
+.filter_input {
+  size: auto;
 }
 /* ng-container {
   width: 400px;

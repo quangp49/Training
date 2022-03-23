@@ -100,11 +100,4 @@ export interface PeriodicElement {
   maxRoom: number;
   status: number;
   remarks: string;
-  // createdUserId: string;
-  // createdTime: Date;
-  // updatedUserId: string;
-  // updatedTime: Date;
-  // isCalRightToAsset: string;
 }
-
-// const ELEMENT_DATA: PeriodicElement[] = []

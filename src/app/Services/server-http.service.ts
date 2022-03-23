@@ -16,6 +16,7 @@ export class ServerHttpService {
   }
 
   private REST_API_SERVER = 'http://localhost:3000'
+  private UNIT_API = 'http://localhost:8080/apinhom4/unit'
 
   constructor(private httpClient: HttpClient) { }
 
@@ -29,6 +30,30 @@ export class ServerHttpService {
     const url_menu = `${this.REST_API_SERVER}/menu`;
     return this.httpClient
       .get<any>(url_menu, this.httpOptions)
+      .pipe(catchError(this.handleError));
+  }
+  public getUnit(): Observable<any> {
+    const url_menu = `${this.UNIT_API}/get`;
+    return this.httpClient
+      .post<any>(url_menu, this.httpOptions, {})
+      .pipe(catchError(this.handleError));
+  }
+  public insertUnit(): Observable<any> {
+    const url_menu = `${this.UNIT_API}/insert`;
+    return this.httpClient
+      .post<any>(url_menu, this.httpOptions, {})
+      .pipe(catchError(this.handleError));
+  }
+  public updateUnit(): Observable<any> {
+    const url_menu = `${this.UNIT_API}/update`;
+    return this.httpClient
+      .post<any>(url_menu, this.httpOptions, {})
+      .pipe(catchError(this.handleError));
+  }
+  public deleteUnit(): Observable<any> {
+    const url_menu = `${this.UNIT_API}/delete`;
+    return this.httpClient
+      .post<any>(url_menu, this.httpOptions, {})
       .pipe(catchError(this.handleError));
   }
 
