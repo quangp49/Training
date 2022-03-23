@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { catchError, Observable } from 'rxjs';
 import { throwError } from 'rxjs/internal/observable/throwError';
+import { PeriodicUnit } from '../sys-unit/sys-unit.component';
 
 @Injectable({
   providedIn: 'root'

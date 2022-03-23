@@ -3,7 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 
-import { PeriodicElement } from '../sys-unit.component';
+import { PeriodicUnit } from '../sys-unit.component';
 import { ServerHttpService } from 'src/app/Services/server-http.service';
 
 const actionList = {
@@ -45,7 +45,7 @@ export class SysUnitDialogComponent {
   updatedUserId: string;
   updatedTime: Date;
 
-  branchList: PeriodicElement[];
+  branchList: PeriodicUnit[];
   branchCodeFilter: Observable<string[]>;
   branchCodeControl = new FormControl();
 
@@ -96,7 +96,7 @@ export class SysUnitDialogComponent {
   }
 
   onYesClick(): void {
-    const unit: PeriodicElement = {
+    const unit: PeriodicUnit = {
       unitCode: this.unitCode,
       branchCode: this.branchCodeControl.value,
       unitName: this.unitName,
@@ -127,6 +127,8 @@ export class SysUnitDialogComponent {
     }
     else {
       this.serverHttp.deleteUnit().subscribe(data => {
+        console.log('delete test');
+
         this.dialogRef.close();
       });
     }

@@ -45,7 +45,7 @@ export class SysUnitComponent implements AfterViewInit {
     "updatedTime",
   ];
 
-  dataSource = new MatTableDataSource<PeriodicElement>();
+  dataSource = new MatTableDataSource<PeriodicUnit>();
   clone: any;
   typeList: any;
   statusList: any;
@@ -85,9 +85,8 @@ export class SysUnitComponent implements AfterViewInit {
       },
     });
 
-    // dialogRef.afterClosed().subscribe(result => {
-    //   this.getAllSysUnits();
-    // });
+    dialogRef.afterClosed().subscribe(data => {
+    });
   }
 
   edit_unit(row: any): void {
@@ -173,7 +172,7 @@ export class SysUnitComponent implements AfterViewInit {
     }
   }
 }
-export interface PeriodicElement {
+export interface PeriodicUnit {
   unitCode: string;
   branchCode: string;
   unitName: string;
