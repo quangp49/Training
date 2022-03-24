@@ -8,6 +8,7 @@ import { MatDialog } from "@angular/material/dialog";
 
 import { ServerHttpService } from "../Services/server-http.service";
 import { SysUnitDialogComponent } from "./sys-unit-dialog/sys-unit-dialog.component";
+import { FormControl } from "@angular/forms";
 
 /**
  * @title Table with pagination
@@ -45,21 +46,43 @@ export class SysUnitComponent implements AfterViewInit {
     "updatedTime",
   ];
 
-  dataSource = new MatTableDataSource<PeriodicUnit>();
+  dataSource = new MatTableDataSource<SysUnit>();
   clone: any;
   typeList: any;
   statusList: any;
+
+  unitNameSelected: string;
+  addressSelected: string;
+
+  branchList: SysBranch[];
+  sysUnitList: SysUnit[];
+  unitCodeControl = new FormControl();
+  branchCodeControl = new FormControl();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   ngAfterViewInit(): void {
-    this.serverHttp.getUnit().subscribe(data => {
-      this.clone = data.data;
-      this.convertType();
-      this.dataSource = new MatTableDataSource(this.clone);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+    this.getAllSysUnits();
+  }
+
+  getAllSysUnits(): void {
+    const sysUnit = {
+      unitCode: this.unitCodeControl.value,
+      branchCode: this.branchCodeControl.value,
+      unitName: this.unitNameSelected,
+      address: this.addressSelected,
+    };
+    this.serverHttp.getUnit(sysUnit).subscribe(data => {
+      if (data.resultCode === 0) {
+        this.clone = data.data;
+        // this.convertType();
+        this.dataSource = new MatTableDataSource(this.clone);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        // this.changeDetectorRefs.detectChanges();
+        // this.fileSaverData = response.data;
+      }
     })
   }
 
@@ -82,10 +105,12 @@ export class SysUnitComponent implements AfterViewInit {
       width: "600px",
       data: {
         action: 'add',
+        branchList: this.branchList
       },
     });
 
-    dialogRef.afterClosed().subscribe(data => {
+    dialogRef.afterClosed().subscribe(dataa => {
+      this.getAllSysUnits();
     });
   }
 
@@ -96,7 +121,12 @@ export class SysUnitComponent implements AfterViewInit {
       data: {
         action: 'update',
         data: row,
+        branchList: this.branchList
       },
+    });
+
+    dialogRef.afterClosed().subscribe(dataa => {
+      this.getAllSysUnits();
     });
   }
 
@@ -109,8 +139,11 @@ export class SysUnitComponent implements AfterViewInit {
         data: row,
       }
     });
-  }
 
+    dialogRef.afterClosed().subscribe(dataa => {
+      this.getAllSysUnits();
+    });
+  }
 
   getType(type: any): any {
     if (typeof type === 'string') {
@@ -172,7 +205,7 @@ export class SysUnitComponent implements AfterViewInit {
     }
   }
 }
-export interface PeriodicUnit {
+export interface SysUnit {
   unitCode: string;
   branchCode: string;
   unitName: string;
@@ -183,6 +216,22 @@ export interface PeriodicUnit {
   email: string;
   type: number;
   status: number;
+  remarks: string;
+  // createdUserId: string;
+  // createdTime: Date;
+  // updatedUserId: string;
+  // updatedTime: Date;
+}
+export interface SysBranch {
+  branchCode: string;
+  branchName: string;
+  branchSName: string;
+  address: string;
+  telNo: string;
+  faxNo: string;
+  email: string;
+  type: number; // option
+  status: number; // option
   remarks: string;
   createdUserId: string;
   createdTime: Date;

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { catchError, Observable } from 'rxjs';
 import { throwError } from 'rxjs/internal/observable/throwError';
-import { PeriodicUnit } from '../sys-unit/sys-unit.component';
+import { SysUnit } from '../sys-unit/sys-unit.component';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,7 @@ export class ServerHttpService {
   }
 
   private REST_API_SERVER = 'http://localhost:3000'
-  private UNIT_API = 'http://localhost:8080/apinhom4/unit'
+  private UNIT_API = 'http://localhost:8080/apinhom4/sysunit'
 
   constructor(private httpClient: HttpClient) { }
 
@@ -33,29 +33,18 @@ export class ServerHttpService {
       .get<any>(url_menu, this.httpOptions)
       .pipe(catchError(this.handleError));
   }
-  public getUnit(): Observable<any> {
-    const url_menu = `${this.UNIT_API}/get`;
-    return this.httpClient
-      .post<any>(url_menu, this.httpOptions, {})
-      .pipe(catchError(this.handleError));
+  public getUnit(sysUnit: any): Observable<any> {
+    return this.httpClient.post<Response>(this.UNIT_API + '/get', sysUnit, this.httpOptions).pipe(catchError(this.handleError))
   }
-  public insertUnit(): Observable<any> {
-    const url_menu = `${this.UNIT_API}/insert`;
-    return this.httpClient
-      .post<any>(url_menu, this.httpOptions, {})
-      .pipe(catchError(this.handleError));
+  public insertUnit(sysUnit: any): Observable<any> {
+    var url = this.UNIT_API + '/insert';
+    return this.httpClient.post<Response>(url, sysUnit, this.httpOptions).pipe(catchError(this.handleError))
   }
-  public updateUnit(): Observable<any> {
-    const url_menu = `${this.UNIT_API}/update`;
-    return this.httpClient
-      .post<any>(url_menu, this.httpOptions, {})
-      .pipe(catchError(this.handleError));
+  public updateUnit(sysUnit: any): Observable<any> {
+    return this.httpClient.post<Response>(this.UNIT_API + '/update', sysUnit, this.httpOptions).pipe(catchError(this.handleError))
   }
-  public deleteUnit(): Observable<any> {
-    const url_menu = `${this.UNIT_API}/delete`;
-    return this.httpClient
-      .post<any>(url_menu, this.httpOptions, {})
-      .pipe(catchError(this.handleError));
+  public deleteUnit(sysUnit: any): Observable<any> {
+    return this.httpClient.post<Response>(this.UNIT_API + '/delete', sysUnit, this.httpOptions).pipe(catchError(this.handleError))
   }
 
   private handleError(error: HttpErrorResponse) {

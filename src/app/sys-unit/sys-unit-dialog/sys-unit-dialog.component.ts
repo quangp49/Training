@@ -3,7 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 
-import { PeriodicUnit } from '../sys-unit.component';
+import { SysUnit } from '../sys-unit.component';
 import { ServerHttpService } from 'src/app/Services/server-http.service';
 
 const actionList = {
@@ -29,7 +29,7 @@ export class SysUnitDialogComponent {
   typeList: any;
   statusList: any;
 
-  unitCode: string;
+  unitCode: string = '';
   branchCode: string;
   unitName: string;
   unitSName: string;
@@ -37,7 +37,7 @@ export class SysUnitDialogComponent {
   telNo: string;
   faxNo: string;
   email: string;
-  type: number;
+  type: number = 0;
   status: number;
   remarks: string;
   createdUserId: string;
@@ -45,7 +45,7 @@ export class SysUnitDialogComponent {
   updatedUserId: string;
   updatedTime: Date;
 
-  branchList: PeriodicUnit[];
+  branchList: SysUnit[];
   branchCodeFilter: Observable<string[]>;
   branchCodeControl = new FormControl();
 
@@ -96,7 +96,7 @@ export class SysUnitDialogComponent {
   }
 
   onYesClick(): void {
-    const unit: PeriodicUnit = {
+    const unit: SysUnit = {
       unitCode: this.unitCode,
       branchCode: this.branchCodeControl.value,
       unitName: this.unitName,
@@ -105,30 +105,32 @@ export class SysUnitDialogComponent {
       telNo: this.telNo,
       faxNo: this.faxNo,
       email: this.email,
-      type: this.type,
-      status: this.status,
-      remarks: this.remarks,
-      createdUserId: this.createdUserId,
-      createdTime: this.createdTime,
-      updatedUserId: this.createdUserId,
-      updatedTime: this.updatedTime,
+      type: this.getType(this.type).data,
+      status: this.getStatus(this.status).data,
+      remarks: this.remarks
+      // createdUserId: this.createdUserId,
+      // createdTime: this.createdTime,
+      // updatedUserId: this.createdUserId,
+      // updatedTime: this.updatedTime,
     };
-    console.log(this.action, unit);
 
+    console.log(this.action, unit);
     if (this.action === this.ACTION_ADD) {
-      this.serverHttp.insertUnit().subscribe(data => {
+      this.serverHttp.insertUnit(unit).subscribe(data => {
+        console.log('insert test', data);
         this.dialogRef.close();
-      });
+      }, err => console.log(err)
+      );
     }
     else if (this.action === this.ACTION_UPDATE) {
-      this.serverHttp.updateUnit().subscribe(data => {
+      this.serverHttp.updateUnit(unit).subscribe(data => {
+        console.log('update test', data);
         this.dialogRef.close();
       });
     }
     else {
-      this.serverHttp.deleteUnit().subscribe(data => {
-        console.log('delete test');
-
+      this.serverHttp.deleteUnit(unit).subscribe(data => {
+        console.log('delete test', data);
         this.dialogRef.close();
       });
     }
