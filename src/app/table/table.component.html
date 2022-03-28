@@ -5,22 +5,11 @@
         <input matInput type="search" (keyup)="applyFilter($event)" placeholder="Nhập vào gì đó..."
             aria-label="Tìm kiếm">
     </mat-form-field>
-    <!-- <h3> Results </h3>
-    <ul>
-        <li *ngFor="     
-            | search: searchInput">
-            {{programmingLanguage}}
-        </li>
-    </ul> -->
 </form>
 <hr>
 <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)" class="maintable"
         style="overflow-x: auto;">
-        <!-- <ng-container matColumnDef="action">
-        <th mat-header-cell *matHeaderCellDef>Hành động</th>
-        <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-        </ng-container> -->
 
         <ng-container matColumnDef="secCd">
             <th mat-header-cell *matHeaderCellDef mat-sort-header class="header scol">Mã CKK</th>
