@@ -30,19 +30,19 @@ export class SysUnitDialogComponent {
   statusList: any;
 
   unitCode: string = '';
-  branchCode: string;
-  unitName: string;
-  unitSName: string;
-  address: string;
-  telNo: string;
-  faxNo: string;
-  email: string;
-  type: number = 0;
-  status: number;
-  remarks: string;
-  createdUserId: string;
+  branchCode: string = '';
+  unitName: string = '';
+  unitSName: string = '';
+  address: string = '';
+  telNo: string = '';
+  faxNo: string = '';
+  email: string = '';
+  type: string = '';
+  status: string = '';
+  remarks: string = '';
+  createdUserId: string = '';
   createdTime: Date;
-  updatedUserId: string;
+  updatedUserId: string = '';
   updatedTime: Date;
 
   branchList: SysUnit[];
@@ -55,7 +55,6 @@ export class SysUnitDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
     this.action = data.action;
-
     if (this.action === this.ACTION_ADD) {
       this.title = 'Thêm Đơn Vị';
       this.titleYes = 'Thêm';
@@ -63,9 +62,8 @@ export class SysUnitDialogComponent {
       this.title = 'Sửa Đơn Vị';
       this.titleYes = 'Sửa';
     } else if (this.action === this.ACTION_DELETE) {
-      this.title = 'Xóa Đơn Vị';
-      this.titleYes = 'Xóa';
-      this.message = 'Xác nhận xóa đơn vị?';
+      this.title = 'Đóng Đơn Vị';
+      this.titleYes = 'Đóng';
     }
 
     this.typeList = SYS_UNIT_TYPE;
@@ -82,7 +80,7 @@ export class SysUnitDialogComponent {
       this.faxNo = data.data.faxNo;
       this.email = data.data.email;
       this.type = this.getType(data.data.type).value;
-      this.status = this.getType(data.data.status).value;
+      this.status = this.getStatus(data.data.status).value;
       this.remarks = data.data.remarks;
       this.createdUserId = data.data.createdUserId;
       this.createdTime = data.data.createdTime;
@@ -105,16 +103,11 @@ export class SysUnitDialogComponent {
       telNo: this.telNo,
       faxNo: this.faxNo,
       email: this.email,
-      type: this.getType(this.type).data,
-      status: this.getStatus(this.status).data,
+      type: this.type,
+      status: this.status,
       remarks: this.remarks
-      // createdUserId: this.createdUserId,
-      // createdTime: this.createdTime,
-      // updatedUserId: this.createdUserId,
-      // updatedTime: this.updatedTime,
     };
-
-    console.log(this.action, unit);
+    console.log('test ', unit);
     if (this.action === this.ACTION_ADD) {
       this.serverHttp.insertUnit(unit).subscribe(data => {
         console.log('insert test', data);
@@ -126,20 +119,22 @@ export class SysUnitDialogComponent {
       this.serverHttp.updateUnit(unit).subscribe(data => {
         console.log('update test', data);
         this.dialogRef.close();
-      });
+      }, err => console.log(err)
+      );
     }
     else {
       this.serverHttp.deleteUnit(unit).subscribe(data => {
         console.log('delete test', data);
         this.dialogRef.close();
-      });
+      }, err => console.log(err)
+      );
     }
   }
 
   getType(type: any): any {
     if (typeof type === 'string') {
       for (const data of this.typeList) {
-        if (data.value === type) {
+        if (data.name === type) {
           return data;
         }
       }
@@ -156,7 +151,7 @@ export class SysUnitDialogComponent {
   getStatus(status: any): any {
     if (typeof status === 'string') {
       for (const data of this.statusList) {
-        if (data.value === status) {
+        if (data.name === status) {
           return data;
         }
       }
@@ -189,6 +184,6 @@ export const SYS_UNIT_STATUS = [{
   value: '1'
 }, {
   name: 'Đóng',
-  data: 2,
-  value: '2'
+  data: 9,
+  value: '9'
 }];

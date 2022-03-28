@@ -7,7 +7,7 @@ import { MatTableDataSource } from "@angular/material/table";
 import { MatDialog } from "@angular/material/dialog";
 
 import { ServerHttpService } from "../Services/server-http.service";
-import { SysUnitDialogComponent } from "./sys-unit-dialog/sys-unit-dialog.component";
+import { SysUnitDialogComponent, SYS_UNIT_STATUS, SYS_UNIT_TYPE } from "./sys-unit-dialog/sys-unit-dialog.component";
 import { FormControl } from "@angular/forms";
 
 /**
@@ -26,6 +26,8 @@ export class SysUnitComponent implements AfterViewInit {
     private _liveAnnouncer: LiveAnnouncer,
     public dialog: MatDialog,
   ) {
+    this.typeList = SYS_UNIT_TYPE;
+    this.statusList = SYS_UNIT_STATUS;
   }
 
   displayedColumns: string[] = [
@@ -53,6 +55,8 @@ export class SysUnitComponent implements AfterViewInit {
 
   unitNameSelected: string;
   addressSelected: string;
+  typeSelected: string;
+  statusSelected: string;
 
   branchList: SysBranch[];
   sysUnitList: SysUnit[];
@@ -76,12 +80,10 @@ export class SysUnitComponent implements AfterViewInit {
     this.serverHttp.getUnit(sysUnit).subscribe(data => {
       if (data.resultCode === 0) {
         this.clone = data.data;
-        // this.convertType();
+        this.convertType();
         this.dataSource = new MatTableDataSource(this.clone);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-        // this.changeDetectorRefs.detectChanges();
-        // this.fileSaverData = response.data;
       }
     })
   }
@@ -121,7 +123,7 @@ export class SysUnitComponent implements AfterViewInit {
       data: {
         action: 'update',
         data: row,
-        branchList: this.branchList
+        branchList: this.branchList,
       },
     });
 
@@ -143,6 +145,32 @@ export class SysUnitComponent implements AfterViewInit {
     dialogRef.afterClosed().subscribe(dataa => {
       this.getAllSysUnits();
     });
+  }
+
+  search(): void {
+    const unit = {
+      unitCode: this.unitCodeControl.value,
+      branchCode: this.branchCodeControl.value,
+      unitName: this.unitNameSelected,
+      address: this.addressSelected,
+      type: this.getType(this.typeSelected).data, // option
+      status: this.getStatus(this.statusSelected).data, // option
+    };
+
+    this.serverHttp.getUnit(unit)
+      .subscribe(data => {
+        if (data.resultCode === 0) {
+          this.clone = data.data;
+          this.convertType();
+          this.dataSource = new MatTableDataSource(this.clone);
+          // this.changeDetectorRefs.detectChanges();
+          // this.fileSaverData = response.data;
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+        } else {
+          console.log('lỗi rồi :)');
+        }
+      });
   }
 
   getType(type: any): any {
@@ -183,7 +211,7 @@ export class SysUnitComponent implements AfterViewInit {
     for (var itemm of this.clone) {
       // type
       if (itemm.type === 1) {
-        itemm.type = "Hội sở chính";
+        itemm.type = "Điểm giao dịch";
       }
       else if (itemm.type === 2) {
         itemm.type = "Đại lý";
@@ -196,7 +224,7 @@ export class SysUnitComponent implements AfterViewInit {
       if (itemm.status === 1) {
         itemm.status = "Mở";
       }
-      else if (itemm.status === 2) {
+      else if (itemm.status === 9) {
         itemm.status = "Đóng";
       }
       else {
@@ -214,8 +242,8 @@ export interface SysUnit {
   telNo: string;
   faxNo: string;
   email: string;
-  type: number;
-  status: number;
+  type: string;
+  status: string;
   remarks: string;
   // createdUserId: string;
   // createdTime: Date;
@@ -230,8 +258,8 @@ export interface SysBranch {
   telNo: string;
   faxNo: string;
   email: string;
-  type: number; // option
-  status: number; // option
+  type: string; // option
+  status: string; // option
   remarks: string;
   createdUserId: string;
   createdTime: Date;
